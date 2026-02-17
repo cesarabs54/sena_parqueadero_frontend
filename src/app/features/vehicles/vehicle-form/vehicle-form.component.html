@@ -1,0 +1,20 @@
+<p-dialog header="Nuevo Vehículo" [(visible)]="visible" [modal]="true" [style]="{ width: '400px' }"
+          (onHide)="close()">
+  <div class="flex flex-column gap-3">
+    <div class="flex flex-column gap-2">
+      <label for="plate">Placa</label>
+      <input pInputText id="plate" [(ngModel)]="plate" class="p-inputtext-lg"
+             [disabled]="loading()"/>
+    </div>
+    <div class="flex align-items-center gap-2">
+      <p-checkbox [(ngModel)]="isActive" [binary]="true" inputId="isActive"></p-checkbox>
+      <label for="isActive">Activo</label>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button label="Cancelar" icon="pi pi-times" [text]="true" (onClick)="close()"
+              [disabled]="loading()"></p-button>
+    <p-button label="Guardar" icon="pi pi-check" (onClick)="save()"
+              [loading]="loading()"></p-button>
+  </ng-template>
+</p-dialog>

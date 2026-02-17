@@ -1,3 +1,168 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "tailwindcss";
+@import "primeicons/primeicons.css";
+
+/* User Defined Theme */
+:root {
+  --color-primary: #204571;
+  --color-secundary: #56abd6;
+  --color-warn: #efc31f;
+  --color-error: #dd4125;
+  --color-success: #2a6640;
+  --background: #f2f2f2;
+}
+
+.boton-warn {
+  background: var(--color-warn) !important;
+}
+
+.boton-error {
+  background: var(--color-error) !important;
+}
+
+.boton-success {
+  background: var(--color-primary) !important;
+}
+
+.boton-info {
+  background: var(--color-secundary) !important;
+}
+
+.p-button-text {
+  color: var(--color-primary) !important;
+}
+
+.p-message-info {
+  background: var(--color-secundary) !important;
+}
+
+.p-message-warn {
+  background: var(--color-warn) !important;
+}
+
+.p-message-error {
+  background: var(--color-error) !important;
+}
+
+.p-message-success {
+  background: var(--color-success) !important;
+}
+
+.bg-1 {
+  background-color: black;
+  color: white;
+}
+
+.bg-2 {
+  background-color: var(--color-primary) !important;
+  color: white;
+}
+
+.bg-3 {
+  background-color: white;
+  color: var(--color-primary);
+}
+
+.bg-image {
+  background: url(https://rionegro.gov.co/wp-content/uploads/2020/10/5.png) no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.bg-light {
+  background-color: #fff;
+  -webkit-box-shadow: 0px 2px 11px -2px rgb(0 0 0 / 25%);
+  -moz-box-shadow: 0px 2px 11px -2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 11px -2px rgb(0 0 0 / 25%);
+}
+
+.w-30 {
+  width: 30% !important;
+}
+
+.w-60 {
+  width: 60% !important;
+}
+
+.btn-tertiary {
+  color: #fff !important;
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.btn-tertiary:hover {
+  color: #fff !important;
+  background-color: var(--color-secundary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.btn-tertiary.focus,
+.btn-tertiary:focus {
+  color: #fff;
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 0.2rem rgba(32, 69, 113, 0.5);
+}
+
+.btn-tertiary.disabled,
+.btn-tertiary:disabled {
+  color: #fff;
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.btn-tertiary:not(:disabled):not(.disabled).active,
+.btn-tertiary:not(:disabled):not(.disabled):active,
+.show > .btn-tertiary.dropdown-toggle {
+  color: #fff;
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.btn-tertiary:not(:disabled):not(.disabled).active:focus,
+.btn-tertiary:not(:disabled):not(.disabled):active:focus,
+.show > .btn-tertiary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(32, 69, 113, 0.5) !important;
+}
+
+.btn-tertiary-invert {
+  color: #fff !important;
+  background-color: transparent !important;
+  border-color: white !important;
+}
+
+.btn-tertiary-invert:hover {
+  color: var(--color-primary) !important;
+  background-color: white !important;
+  border-color: white !important;
+}
+
+.btn-tertiary-invert.focus,
+.btn-tertiary-invert:focus {
+  color: white;
+  background-color: var(--color-primary) !important;
+  border-color: white !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5) !important;
+}
+
+.btn-tertiary-invert.disabled,
+.btn-tertiary-invert:disabled {
+  color: #fff !important;
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.btn-tertiary-invert:not(:disabled):not(.disabled).active,
+.btn-tertiary-invert:not(:disabled):not(.disabled):active,
+.show > .btn-tertiary-invert.dropdown-toggle {
+  color: #fff !important;
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.btn-tertiary-invert:not(:disabled):not(.disabled).active:focus,
+.btn-tertiary-invert:not(:disabled):not(.disabled):active:focus,
+.show > .btn-tertiary-invert.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(32, 69, 113, 0.5) !important;
+}

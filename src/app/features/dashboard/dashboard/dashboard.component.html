@@ -1,0 +1,15 @@
+<div class="p-6 grid gap-4">
+  <p-card header="Ocupación en Tiempo Real" subheader="Parqueadero Principal"
+          [style]="{ width: '360px' }">
+    <div class="flex justify-content-center align-items-center flex-column gap-4">
+      <div class="text-center">
+        <p-knob [(ngModel)]="occupancy" [readonly]="true" [max]="100" valueTemplate="{value}"
+                size="150" rangeColor="#48d1cc" valueColor="#3b82f6"></p-knob>
+        <span class="text-xl font-bold block mt-2">Vehículos</span>
+      </div>
+
+      <p-button label="Actualizar" icon="pi pi-refresh" [loading]="loading()"
+                (onClick)="loadOccupancy()"></p-button>
+    </div>
+  </p-card>
+</div>
