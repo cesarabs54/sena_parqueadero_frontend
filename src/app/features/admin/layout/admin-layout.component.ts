@@ -54,21 +54,7 @@ import { InputTextModule } from 'primeng/inputtext';
 
         <!-- Main Content -->
         <div class="flex-grow flex flex-col h-full overflow-hidden bg-slate-950">
-          <!-- Topbar -->
-          <div class="h-20 bg-slate-900 shadow-sm flex items-center px-8 justify-between z-1 relative border-b border-slate-800">
-              <div class="flex items-center">
-                  <h1 class="text-2xl font-semibold text-white m-0">Dashboard</h1>
-              </div>
 
-              <div class="flex items-center gap-6">
-                  <span class="p-input-icon-left">
-                      <i class="pi pi-search text-slate-400"></i>
-                      <input type="text" pInputText placeholder="Buscar..." class="w-80 rounded-2xl bg-slate-800 border-none text-white focus:bg-slate-700 transition-all placeholder-slate-500" />
-                  </span>
-
-
-              </div>
-          </div>
 
           <!-- Scrollable Content -->
           <div class="flex-grow p-8 overflow-y-auto bg-slate-950">
