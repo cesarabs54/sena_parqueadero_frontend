@@ -16,10 +16,8 @@ import {FormsModule} from '@angular/forms';
 export class DashboardComponent implements OnInit {
   private parkingService = inject(ParkingService);
 
-  // Hardcoded ID for MVP, pending "Select Parking Lot" feature
-  parkingLotId = '47184205-c9fc-43cb-bb68-ec379430c000';
-
-  occupancy = signal<number>(0);
+  parkingLots = signal<any[]>([]);
+  totalOccupancy = signal<number>(0);
   loading = signal<boolean>(false);
 
   ngOnInit() {
@@ -28,9 +26,11 @@ export class DashboardComponent implements OnInit {
 
   loadOccupancy() {
     this.loading.set(true);
-    this.parkingService.getOccupancy(this.parkingLotId).subscribe({
-      next: (count) => {
-        this.occupancy.set(count);
+    this.parkingService.getAllParkingLots().subscribe({
+      next: (lots) => {
+        this.parkingLots.set(lots);
+        const total = lots.reduce((acc, lot) => acc + (lot.occupied || 0), 0);
+        this.totalOccupancy.set(total);
         this.loading.set(false);
       },
       error: (err) => {
@@ -38,5 +38,19 @@ export class DashboardComponent implements OnInit {
         this.loading.set(false);
       }
     });
+  }
+
+  getAvailabilityColor(capacity: number, occupied: number): string {
+    const free = capacity - occupied;
+    const percentageFree = (free / capacity) * 100;
+
+    if (free === 0) return '#ef4444'; // Red (0 free)
+    if (percentageFree < 25) return '#f97316'; // Orange (< 25% free)
+    if (percentageFree < 50) return '#eab308'; // Yellow (25-50% free)
+    return '#22c55e'; // Green (50-100% free)
+  }
+
+  getFreeSpaces(capacity: number, occupied: number): number {
+    return capacity - occupied;
   }
 }

@@ -21,6 +21,23 @@ export class ParkingService {
   }
 
   getOccupancy(parkingLotId: string): Observable<number> {
-    return this.http.get<number>(`${this.apiUrl}/occupancy/${parkingLotId}`);
+    return this.http.get<number>(`${this.apiUrl}/access/occupancy/${parkingLotId}`);
+  }
+
+  // Admin Endpoints
+  getAccessLogs(): Observable<AccessLog[]> {
+    return this.http.get<AccessLog[]>(`${this.apiUrl}/access/logs`);
+  }
+
+  getAllParkingLots(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/parking-lot`);
+  }
+
+  createParkingLot(parkingLot: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/parking-lot`, parkingLot);
+  }
+
+  updateParkingLot(id: string, parkingLot: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/parking-lot/${id}`, parkingLot);
   }
 }

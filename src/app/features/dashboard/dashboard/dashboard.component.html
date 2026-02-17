@@ -1,15 +1,40 @@
-<div class="p-6 grid gap-4">
-  <p-card header="Ocupación en Tiempo Real" subheader="Parqueadero Principal"
-          [style]="{ width: '360px' }">
-    <div class="flex justify-content-center align-items-center flex-column gap-4">
-      <div class="text-center">
-        <p-knob [(ngModel)]="occupancy" [readonly]="true" [max]="100" valueTemplate="{value}"
-                size="150" rangeColor="#48d1cc" valueColor="#3b82f6"></p-knob>
-        <span class="text-xl font-bold block mt-2">Vehículos</span>
-      </div>
+<div class="p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-2xl font-bold text-white m-0">Estado del Parqueadero</h2>
+    <p-button label="Actualizar" icon="pi pi-refresh" [loading]="loading()"
+              (onClick)="loadOccupancy()"
+              [rounded]="true"></p-button>
+  </div>
 
-      <p-button label="Actualizar" icon="pi pi-refresh" [loading]="loading()"
-                (onClick)="loadOccupancy()"></p-button>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Total Summary -->
+    <div
+      class="bg-slate-900 p-6 rounded-xl shadow-lg border border-slate-800 flex flex-col items-center">
+      <h3 class="text-slate-400 font-medium mb-4">Ocupación Total</h3>
+      <p-knob [ngModel]="totalOccupancy()" [readonly]="true" [max]="1000" valueTemplate="{value}"
+              size="150"
+              rangeColor="#1e293b" valueColor="#3b82f6"></p-knob> <!-- Helper blue for total -->
+      <span class="text-white font-bold mt-2">Vehículos en Total</span>
     </div>
-  </p-card>
+
+    <!-- Individual Zones -->
+    <div *ngFor="let lot of parkingLots()"
+         class="bg-slate-900 p-6 rounded-xl shadow-lg border border-slate-800 flex flex-col items-center">
+      <h3 class="text-slate-200 font-bold mb-1">{{ lot.name }}</h3>
+      <p class="text-slate-500 text-sm mb-4">{{ getFreeSpaces(lot.capacity, lot.occupied) }} lugares
+        libres</p>
+
+      <p-knob [ngModel]="lot.occupied" [readonly]="true" [max]="lot.capacity"
+              valueTemplate="{value} / {{lot.capacity}}"
+              size="150" rangeColor="#1e293b"
+              [valueColor]="getAvailabilityColor(lot.capacity, lot.occupied)"></p-knob>
+
+      <div class="mt-4 flex gap-2">
+        <span class="px-3 py-1 rounded-full text-xs font-bold"
+              [ngStyle]="{'background-color': getAvailabilityColor(lot.capacity, lot.occupied) + '20', 'color': getAvailabilityColor(lot.capacity, lot.occupied)}">
+          {{ (getFreeSpaces(lot.capacity, lot.occupied) / lot.capacity * 100) | number:'1.0-0' }}% Libre
+        </span>
+      </div>
+    </div>
+  </div>
 </div>
