@@ -3,12 +3,14 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {AuthorizedVehicle} from '../../core/models/vehicle.model';
 
+import {environment} from '../../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class VehicleService {
   private http = inject(HttpClient);
-  private apiUrl = '/api/vehicles';
+  private apiUrl = `${environment.api_url}/vehicles`;
 
   getAll(): Observable<AuthorizedVehicle[]> {
     return this.http.get<AuthorizedVehicle[]>(this.apiUrl);
