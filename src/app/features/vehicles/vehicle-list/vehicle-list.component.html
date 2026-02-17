@@ -3,9 +3,17 @@
   <p-confirmDialog></p-confirmDialog>
 
   <div class="flex justify-content-between align-items-center mb-4">
-    <h2 class="text-xl font-bold">Vehículos Autorizados</h2>
-    <p-button label="Nuevo Vehículo" icon="pi pi-plus" class="p-button-success"
-              (onClick)="showForm = true"></p-button>
+    <div class="flex flex-column gap-1">
+      <h2 class="text-xl font-bold">Consola de Operaciones - Lista de Acceso</h2>
+      <p class="text-slate-400 text-sm">Controle los ingresos y salidas de vehículos autorizados y
+        visitantes.</p>
+    </div>
+    <div class="flex gap-2">
+      <p-button label="Ingreso Visitante" icon="pi pi-user-plus" severity="help"
+                (onClick)="showVisitorForm = true"></p-button>
+      <p-button label="Nuevo Vehículo" icon="pi pi-plus" class="p-button-success"
+                (onClick)="showForm = true"></p-button>
+    </div>
   </div>
 
   <p-table [value]="vehicles()" [loading]="loading()" [tableStyle]="{ 'min-width': '50rem' }">
@@ -25,17 +33,78 @@
           </span>
         </td>
         <td>
-          <p-button icon="pi pi-trash" severity="danger" [text]="true"
-                    (onClick)="deleteVehicle(vehicle.plate)"></p-button>
+          <div class="flex gap-2">
+            <p-button icon="pi pi-check-circle" label="Ingreso" severity="success" [text]="true"
+                      [rounded]="true"
+                      pTooltip="Registrar Ingreso" tooltipPosition="top"
+                      (onClick)="initAccess(vehicle.plate, 'ENTRY')"></p-button>
+
+            <p-button icon="pi pi-ban" label="Salida" severity="warn" [text]="true" [rounded]="true"
+                      pTooltip="Registrar Salida" tooltipPosition="top"
+                      (onClick)="initAccess(vehicle.plate, 'EXIT')"></p-button>
+
+            <span class="w-[1px] bg-slate-700 mx-1 block h-6"></span>
+
+            <p-button icon="pi pi-trash" severity="danger" [text]="true" [rounded]="true"
+                      pTooltip="Eliminar Registro"
+                      tooltipPosition="top" (onClick)="deleteVehicle(vehicle.plate)"></p-button>
+          </div>
         </td>
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="3">No hay vehículos registrados.</td>
+        <td colspan="3" class="text-center p-4">No hay vehículos registrados en la lista de
+          acceso.
+        </td>
       </tr>
     </ng-template>
   </p-table>
 
   <app-vehicle-form [(visible)]="showForm" (onSave)="loadVehicles()"></app-vehicle-form>
+
+  <!-- Zone Selection Dialog (Outside the loop) -->
+  <p-dialog header="Seleccionar Zona de Parqueo" [(visible)]="showZoneSelection" [modal]="true"
+            [style]="{ width: '350px' }" appendTo="body">
+    <div class="flex flex-column gap-4 pt-2">
+      <div class="flex flex-column gap-2">
+        <label class="font-medium text-slate-300">Zona Destino</label>
+        <p-select [options]="parkingLots()" [(ngModel)]="selectedZone" optionLabel="name"
+                  placeholder="Seleccione una zona" [style]="{'width':'100%'}"
+                  appendTo="body"></p-select>
+        <small class="text-slate-500">Vehículo: {{ selectedPlate }}</small>
+      </div>
+      <div class="flex justify-content-end gap-2 mt-2">
+        <p-button label="Cancelar" severity="secondary" [text]="true"
+                  (onClick)="showZoneSelection = false"></p-button>
+        <p-button label="Confirmar Acceso"
+                  [severity]="selectedAction === 'ENTRY' ? 'success' : 'warn'"
+                  (onClick)="processAccess()" [disabled]="!selectedZone"></p-button>
+      </div>
+    </div>
+  </p-dialog>
+
+  <!-- Visitor Access Dialog -->
+  <p-dialog header="Registro de Ingreso Visitante" [(visible)]="showVisitorForm" [modal]="true"
+            [style]="{ width: '400px' }" appendTo="body">
+    <div class="flex flex-column gap-4 pt-2">
+      <div class="flex flex-column gap-2">
+        <label class="font-medium">Placa del Vehículo</label>
+        <input type="text" pInputText [(ngModel)]="visitorPlate" placeholder="ABC-123"
+               class="uppercase"/>
+      </div>
+      <div class="flex flex-column gap-2">
+        <label class="font-medium">Zona de Parqueo</label>
+        <p-select [options]="parkingLots()" [(ngModel)]="visitorZone" optionLabel="name"
+                  placeholder="Seleccione zona de visitantes" [style]="{'width':'100%'}"
+                  appendTo="body"></p-select>
+      </div>
+      <div class="flex justify-content-end gap-2 mt-2">
+        <p-button label="Cancelar" severity="secondary" [text]="true"
+                  (onClick)="showVisitorForm = false"></p-button>
+        <p-button label="Registrar Entrada" severity="success" (onClick)="registerVisitorEntry()"
+                  [disabled]="!visitorPlate || !visitorZone"></p-button>
+      </div>
+    </div>
+  </p-dialog>
 </div>

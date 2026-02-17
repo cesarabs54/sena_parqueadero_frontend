@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MenubarModule} from 'primeng/menubar';
-import {MenuItem} from 'primeng/api';
 
 @Component({
   selector: 'app-navbar',
@@ -15,16 +14,10 @@ import {MenuItem} from 'primeng/api';
     </p-menubar>`
 })
 export class NavbarComponent {
-  items: MenuItem[] = [
-    {
-      label: 'Dashboard',
-      icon: 'pi pi-home',
-      routerLink: '/dashboard'
-    },
-    {
-      label: 'Vehículos',
-      icon: 'pi pi-car',
-      routerLink: '/vehicles'
-    }
+  items = [
+    {label: 'Dashboard', icon: 'pi pi-home', routerLink: '/dashboard'},
+    {label: 'Consola', icon: 'pi pi-desktop', routerLink: '/operations'},
+    {label: 'Vehículos', icon: 'pi pi-car', routerLink: '/admin/vehicles'},
+    {label: 'Admin', icon: 'pi pi-cog', routerLink: '/admin'}
   ];
 }

@@ -10,3 +10,10 @@ export interface AccessRequest {
   plate: string;
   parkingLotId: string;
 }
+
+export interface VehicleStatus {
+  plate: string;
+  currentStatus: 'IN' | 'OUT';
+  isAuthorized: boolean;
+  ownerName: string;
+}

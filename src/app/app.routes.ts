@@ -6,13 +6,17 @@ export const routes: Routes = [
     loadComponent: () => import('./features/dashboard/dashboard/dashboard.component').then(m => m.DashboardComponent)
   },
   {
-    path: 'vehicles',
-    loadComponent: () => import('./features/vehicles/vehicle-list/vehicle-list.component').then(m => m.VehicleListComponent)
+    path: 'operations',
+    loadComponent: () => import('./features/operations/operations-console/operations-console').then(m => m.OperationsConsole)
   },
   {
     path: 'admin',
     loadComponent: () => import('./features/admin/layout/admin-layout.component').then(m => m.AdminLayoutComponent),
     children: [
+      {
+        path: 'vehicles',
+        loadComponent: () => import('./features/vehicles/vehicle-list/vehicle-list.component').then(m => m.VehicleListComponent)
+      },
       {
         path: 'history',
         loadComponent: () => import('./features/admin/history/access-history.component').then(m => m.AccessHistoryComponent)
@@ -26,7 +30,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'operations',
     pathMatch: 'full'
   }
 ];

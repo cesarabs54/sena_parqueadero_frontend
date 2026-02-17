@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {AccessLog, AccessRequest} from '../../core/models/access.model';
+import {AccessLog, AccessRequest, VehicleStatus} from '../../core/models/access.model';
 
 import {environment} from '../../../environments/environment';
 
@@ -13,11 +13,15 @@ export class ParkingService {
   private apiUrl = environment.api_url;
 
   registerEntry(request: AccessRequest): Observable<AccessLog> {
-    return this.http.post<AccessLog>(`${this.apiUrl}/entry`, request);
+    return this.http.post<AccessLog>(`${this.apiUrl}/access/entry`, request);
   }
 
   registerExit(request: AccessRequest): Observable<AccessLog> {
-    return this.http.post<AccessLog>(`${this.apiUrl}/exit`, request);
+    return this.http.post<AccessLog>(`${this.apiUrl}/access/exit`, request);
+  }
+
+  getVehicleStatus(plate: String): Observable<VehicleStatus> {
+    return this.http.get<VehicleStatus>(`${this.apiUrl}/access/status/${plate}`);
   }
 
   getOccupancy(parkingLotId: string): Observable<number> {

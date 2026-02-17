@@ -49,7 +49,7 @@ export class VehicleFormComponent {
         this.messageService.add({
           severity: 'success',
           summary: 'Éxito',
-          detail: 'Vehículo registrado'
+          detail: 'Vehículo autorizado correctamente'
         });
         this.loading.set(false);
         this.onSave.emit();
