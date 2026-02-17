@@ -1,4 +1,4 @@
-import {Routes} from '@angular/router';
+import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
@@ -25,7 +25,11 @@ export const routes: Routes = [
         path: 'zones',
         loadComponent: () => import('./features/admin/zones/zone-management.component').then(m => m.ZoneManagementComponent)
       },
-      {path: '', redirectTo: 'history', pathMatch: 'full'}
+      {
+        path: 'users',
+        loadComponent: () => import('./features/admin/users/user-list/user-list.component').then(m => m.UserListComponent)
+      },
+      { path: '', redirectTo: 'history', pathMatch: 'full' }
     ]
   },
   {

@@ -36,6 +36,11 @@ import { InputTextModule } from 'primeng/inputtext';
                       <i class="pi pi-map text-xl mr-3"></i>
                       <span class="font-medium">Gestión de Zonas</span>
                   </a>
+                  <a routerLink="/admin/users" routerLinkActive="bg-orange-500/10 text-orange-500 border-l-4 border-orange-500"
+                     class="p-3 flex items-center text-slate-400 hover:text-white hover:bg-slate-800 rounded transition-colors duration-200 cursor-pointer no-underline">
+                      <i class="pi pi-users text-xl mr-3"></i>
+                      <span class="font-medium">Gestión de Usuarios</span>
+                  </a>
               </div>
           </div>
 
