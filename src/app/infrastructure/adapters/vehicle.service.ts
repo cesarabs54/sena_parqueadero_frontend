@@ -9,8 +9,8 @@ import {environment} from '../../../environments/environment';
   providedIn: 'root'
 })
 export class VehicleService {
-  private http = inject(HttpClient);
-  private apiUrl = `${environment.api_url}/vehicles`;
+  private readonly http = inject(HttpClient);
+  private readonly apiUrl = `${environment.api_url}/vehicles`;
 
   getAll(): Observable<AuthorizedVehicle[]> {
     return this.http.get<AuthorizedVehicle[]>(this.apiUrl);

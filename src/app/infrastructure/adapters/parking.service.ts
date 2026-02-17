@@ -9,8 +9,8 @@ import {environment} from '../../../environments/environment';
   providedIn: 'root'
 })
 export class ParkingService {
-  private http = inject(HttpClient);
-  private apiUrl = environment.api_url;
+  private readonly http = inject(HttpClient);
+  private readonly apiUrl = environment.api_url;
 
   registerEntry(request: AccessRequest): Observable<AccessLog> {
     return this.http.post<AccessLog>(`${this.apiUrl}/access/entry`, request);
@@ -20,7 +20,7 @@ export class ParkingService {
     return this.http.post<AccessLog>(`${this.apiUrl}/access/exit`, request);
   }
 
-  getVehicleStatus(plate: String): Observable<VehicleStatus> {
+  getVehicleStatus(plate: string): Observable<VehicleStatus> {
     return this.http.get<VehicleStatus>(`${this.apiUrl}/access/status/${plate}`);
   }
 
